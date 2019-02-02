@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Thread Group</title>
+<link href="../../lib/ligerUI/skins/Aqua/css/ligerui-all.css"
+	rel="stylesheet" type="text/css">
+<link href="../../lib/ligerUI/skins/ligerui-icons.css" rel="stylesheet"
+	type="text/css">
+<link href="../../lib/ligerUI/skins/Gray/css/all.css" rel="stylesheet"
+	type="text/css">
+<script src="../../lib/jquery/jquery-1.9.0.min.js"
+	type="text/javascript"></script>
+<script src="../../lib/ligerUI/js/ligerui.all.js"></script>
+<style type="text/css">
+body {
+	padding: 5px;
+	margin: 0;
+	padding-bottom: 15px;
+}
+
+#layout1 {
+	width: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+.l-page-top {
+	height: 40px;
+	background: #f8f8f8;
+	margin-bottom: 3px;
+}
+
+h4 {
+	margin: 20px;
+}
+</style>
+<script type="text/javascript">
+    basecontent = 'name:<input type="text" style="width:90%" class="name" value="Thread Group"></br>comments:<input type="text" style="width:87.8%" class="comments" value="">'	
+    actiontypecontent='<div style="text-align:center"><label style="width:15%" ><input name="actiontype" type="radio" value="Continue"/>Continue</label>'
+    	+'<label style="width:15%"  ><input name="actiontype" type="radio" value="StartNextThreadLoop"/>Start Next Thread Loop</label>'
+    	+'<label  style="width:15%" ><input name="actiontype" type="radio" value="StopThread"/>Stop Thread</label>'
+    	+'<label style="width:15%"  ><input name="actiontype" type="radio" value="StopTest"/>Stop Test</label>'
+    	+'<label style="width:15%" ><input name="actiontype" type="radio" value="StopTestNow"/>Stop Test Now</label></div>'
+    threadpropcontent='Number of Threads(users):<input type="text" id="threadnum"></br>'
+    +'Ramp-up period(in seconds):<input type="text" id="Rampupsecond"></br>'
+    +'Loop Count:<label><input id="isForever" type="checkbox" value="Forever"/>Forever</label><input type="text" id="loopcount"></br>'
+    +'<label><input id="isDelayUntilCreated" type="checkbox" value="isDelayUntilCreated"/>Delay Thread Until needed</label></br>'
+    +'<label><input id="isSheduler" type="checkbox"/>Sheduler</label>'
+    shedulercontent='Duration(Seconds):<input type="text" id="shedulerduration"></br>'
+    +'Startup Delay(seconds):<input type="text" id="StartupDelay">'
+	$(function() {
+		$("#portalMain").ligerPortal({
+			columns : [ {
+				width : '100%',
+				panels : [ {
+					title : '基本信息',
+					width : '100%',
+					height : 70,
+					content : basecontent
+				} ]
+			}, {
+				width : '100%',
+				panels : [ {
+					title : 'Action to be taken after a Sampler error',
+					width : '100%',
+					height : 50,
+					content : actiontypecontent
+				} ]
+			}, {
+				width : '100%',
+				panels : [ {
+					title : 'Thread Properties',
+					width : '100%',
+					height : 120,
+					content : threadpropcontent
+				} ]
+			}, {
+				width : '100%',
+				panels : [ {
+					title : 'Sheduler Configuration',
+					width : '100%',
+					height : 70,
+					content : shedulercontent
+				} ]
+			}]
+
+		});
+	})
+</script>
+</head>
+<body>
+	<div class="l-page-top">Thread Group</div>
+
+	<div style="width: 100%;" id="portalMain"></div>
+
+
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Foreach Controller</title>
+<link href="../../lib/ligerUI/skins/Aqua/css/ligerui-all.css"
+	rel="stylesheet" type="text/css">
+<link href="../../lib/ligerUI/skins/ligerui-icons.css" rel="stylesheet"
+	type="text/css">
+<link href="../../lib/ligerUI/skins/Gray/css/all.css" rel="stylesheet"
+	type="text/css">
+<script src="../../lib/jquery/jquery-1.9.0.min.js"
+	type="text/javascript"></script>
+<script src="../../lib/ligerUI/js/ligerui.all.js"></script>
+<style type="text/css">
+body {
+	padding: 5px;
+	margin: 0;
+	padding-bottom: 15px;
+}
+
+#layout1 {
+	width: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+.l-page-top {
+	height: 40px;
+	background: #f8f8f8;
+	margin-bottom: 3px;
+}
+
+h4 {
+	margin: 20px;
+}
+</style>
+<script type="text/javascript">
+	basecontent = 'name:<input type="text" style="width:90%" class="name" value="Foreach Controller"></br>comments:<input type="text" style="width:87.8%" class="comments" value="">'
+	foreachcontent = 'Input Varible prefix:<input type="text" id="prefix"></br>'
+			+ 'Start index for loop(exclusive):<input type="text" id="startindex"></br>'
+			+ 'End index for loop(exclusive):<input type="text" id="endindex"></br>'
+			+ 'Output varible name:<input type="text" id="variblename"></br>'
+			+ '<label><input id="addmark" type="checkbox"/>Add "_" before number</label>'
+	$(function() {
+		$("#portalMain").ligerPortal({
+			columns : [ {
+				width : '100%',
+				panels : [ {
+					title : '基本信息',
+					width : '100%',
+					height : 70,
+					content : basecontent
+				} ]
+			},{
+				width : '100%',
+				panels : [ {
+					title : '循环属性',
+					width : '100%',
+					height : 130,
+					content : foreachcontent
+				} ]
+			}]
+		})
+	})
+</script>
+</head>
+<body>
+	<div class="l-page-top">Foreach Controller</div>
+
+	<div style="width: 100%;" id="portalMain"></div>
+
+</body>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>HttpRequest</title>
+<link rel="stylesheet"
+	href="//apps.bdimg.com/libs/jqueryui/1.10.4/css/jquery-ui.min.css">
+<script src="//apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+<style type="text/css">
+body {
+	padding: 5px;
+	margin: 0;
+	padding-bottom: 15px;
+	font-family: "Trebuchet MS", "Helvetica", "Arial", "Verdana",
+		"sans-serif";
+	font-size: 62.5%;
+}
+
+#layout1 {
+	width: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+.l-page-top {
+	height: 40px;
+	background: #f8f8f8;
+	margin-bottom: 3px;
+}
+
+h4 {
+	margin: 20px;
+}
+</style>
+<script type="text/javascript">
+	$(function() {
+		$("#tabs").tabs()
+		$("#parmstype").tabs()
+	})
+</script>
+</head>
+<body>
+	<div class="l-page-top">Http Request</div>
+	<div style="width: 100%;" id="httprequestmainframe">
+		<div style="width: 100%;; border: 1px solid #000" id="baseproperty">
+			name:<input type="text" style="width: 90%" class="name"
+				value="Http Request"></br> comments:<input type="text"
+				style="width: 88.5%" class="comments" value="">
+		</div>
+		<div id="tabs" width="100%">
+			<ul>
+				<li><a href="#tabs-1">Basic</a></li>
+				<li><a href="#tabs-2">Adavanced</a></li>
+			</ul>
+			<div id="tabs-1">
+				<fieldset id="webserver">
+					<legend>Web Server</legend>
+					Protocal[http]:<input type="text" value=""> Server Name or
+					IP:<input type="text" value=""> Port Number:<input
+						type="text" value="">
+				</fieldset>
+				<fieldset id="HttpRequest">
+					<legend>Http Request</legend>
+					Method:<select>
+						<option value="get">GET</option>
+						<option value="post">POST</option>
+						<option value="head">HEAD</option>
+						<option value="put">PUT</option>
+						<option value="options">OPTIONS</option>
+						<option value="trace">TRACE</option>
+						<option value="delete">DELETE</option>
+						<option value="patch">PATCH</option>
+						<option value="propfind">PROPFIND</option>
+						<option value="mkcol">MKCOL</option>
+						<option value="copy">COPY</option>
+						<option value="move">MOVE</option>
+						<option value="lock">LOCK</option>
+						<option value="unlock">UNLOCK</option>
+						<option value="report">REPORT</option>
+						<option value="mkcalendar">MKCALENDAR</option>
+						<option value="search">SEARCH</option>
+					</select> Path:<input type="text" id="apipath" value>Content
+					encoding:<input type="text" id="encoding" value=""> </br>
+					<div id="radiotype">
+						<label><input type="checkbox" value="">Redirect
+							Automatically</label> <label><input type="checkbox" value="">Follow
+							Redirects</label> <label><input type="checkbox" value="">Use
+							KeepAlive</label> <label><input type="checkbox" value="">Use
+							Mutilpart/form-data</label> <label><input type="checkbox"
+							value="">Browser-compatible headers</label>
+					</div>
+					</br>
+					<div id="parmstype" width="100%">
+						<ul>
+							<li><a href="#tabsparamters">Paramters</a></li>
+							<li><a href="#tabsbodydata">Body data</a></li>
+							<li><a href="#tabsfiledata">Files Upload</a></li>
+						</ul>
+						<div id="tabsparamters">
+							<p style="text-align:center">Send Paramters With the Request</p></br>
+							<div id="paramtable" style="width:100%;height:400px;border: 1px solid #000" >
+							<table border="1" cellpadding="0" cellspacing="0" width="100%">
+							  <tr>
+							     <td>Name:</td>
+							     <td>value</td>
+							     <td>URLENCODE?</td>
+							     <td>ContentType</td>
+							     <td>Include Equals?</td>
+							  </tr>
+							</table>							
+							</div></br>
+							<div style="text-align:center">
+							    <input type="button" value="Detail">
+							    <input type="button" value="Add">
+							    <input type="button" value="Add From Clipboard">
+							    <input type="button" value="Delete">
+							    <input type="button" value="Up">
+							    <input type="button" value="Down">
+							</div>
+						</div>
+						<div id="tabsbodydata">
+							<textarea id="bodydataarea">hello world</textarea>
+						</div>
+						<div id="tabsfiledata">
+							<p>test Adavanced</p>
+						</div>
+
+					</div>
+
+				</fieldset>
+			</div>
+			<div id="tabs-2">
+				<p>test Adavanced</p>
+			</div>
+		</div>
+
+
+
+
+
+
+	</div>
+
+
+
+</body>
+</html>
