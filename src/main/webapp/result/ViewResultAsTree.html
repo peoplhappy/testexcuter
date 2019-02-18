@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>View Results Tree</title>
+<link rel="stylesheet"
+	href="//apps.bdimg.com/libs/jqueryui/1.10.4/css/jquery-ui.min.css">
+<script src="//apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+<style type="text/css">
+body {
+	padding: 5px;
+	margin: 0;
+	padding-bottom: 15px;
+	font-family: "Trebuchet MS", "Helvetica", "Arial", "Verdana",
+		"sans-serif";
+	font-size: 62.5%;
+}
+
+#layout1 {
+	width: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+.l-page-top {
+	height: 40px;
+	background: #f8f8f8;
+	margin-bottom: 3px;
+}
+
+h4 {
+	margin: 20px;
+}
+#bodydata-textarea{
+    width: 100%; 
+    min-height:400px;
+    max-height:700px;
+    outline: 0;
+    border: 1px solid #000;
+    font-size: 13px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-user-modify: read-write-plaintext-only;
+}
+</style>
+<script type="text/javascript">
+	$(function() {
+		$("#tabs").tabs()
+		$("#parmstype").tabs()
+	})
+</script>
+</head>
+<body>
+	<div class="l-page-top">View Results Tree</div>
+	<div style="width: 100%;" id="resultmainframe">
+		<div style="width: 100%;; border: 1px solid #000" id="baseproperty">
+			Filename:<input type="text" style="width: 90%" class="name"
+				value="View Results Tree"></br> comments:<input type="text"
+				style="width: 88.5%" class="comments" value="">
+		</div>
+		<div>
+		   <fieldset id="fileinfo">
+					<legend>Write results to file/Read from file</legend>
+					Protocal[http]:<input type="text" value=""> Server Name or
+					IP:<input type="text" value=""> Port Number:<input
+						type="text" value="">
+			</fieldset>
+		
+		
+		</div>
+
+
+	</div>
+
+
+
+</body>
+</html>
