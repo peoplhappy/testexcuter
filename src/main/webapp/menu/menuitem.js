@@ -83,10 +83,7 @@ delete_item = {
 	text : '删除',
 	click : click_Fake
 }
-insertitem = {
-	text : '插入上级',
-	click : click_Fake
-}
+
 saveastestfragment_item = {
 	text : '保存为测试片段',
 	click : click_Fake
@@ -215,5 +212,203 @@ timer_item = {
 		text : "高斯随机定时器"
 	}, {
 		text : "BeanShell Timer"
-	}]
+	} ]
+}
+pre_item = {
+	text : "前置处理器",
+	children : [ {
+		text : "JSR223 preprocessor"
+	}, {
+		text : "用户参数"
+	}, {
+		line : true
+	}, {
+		text : "HTML链接解析器"
+	}, {
+		text : "HTTP URL重写修饰符"
+	}, {
+		text : "JDBC preprocessor"
+	}, {
+		text : "取样器超时"
+	}, {
+		text : "正则表达式用户参数"
+	}, {
+		text : "高斯随机定时器"
+	}, {
+		text : "BeanShell preprocessor"
+	} ]
+}
+
+post_item = {
+	text : "后置处理器",
+	children : [ {
+		text : "CSS/JQUERY提取器"
+	}, {
+		text : "JSON提取器"
+	}, {
+		text : "正则表达式提取器"
+	}, {
+		text : "边界提取器"
+	}, {
+		text : "JSR223 postprocessor"
+	}, {
+		line : true
+	}, {
+		text : "Debug postprocessor"
+	}, {
+		text : "JDBC postprocessor"
+	}, {
+		text : "XPath2 Extractor"
+	}, {
+		text : "XPath提取器"
+	}, {
+		text : "结果状态处理器"
+	}, {
+		text : "BeanShell postprocessor"
+	} ]
+}
+
+assertion_item = {
+	text : "断言",
+	children : [ {
+		text : "响应断言"
+	}, {
+		text : "JSON断言"
+	}, {
+		text : "大小断言"
+	}, {
+		text : "JSR223 Assertion"
+	}, {
+		text : "Xpath断言"
+	}, {
+		line : true
+	}, {
+		text : "Compare Assertion"
+	}, {
+		text : "HTML断言"
+	}, {
+		text : "MD5Hex断言"
+	}, {
+		text : "SMIME断言"
+	}, {
+		text : "XML Schema断言"
+	}, {
+		text : "XML断言"
+	}, {
+		text : "断言持续时间"
+	}, {
+		text : "BeanShell断言"
+	} ]
+}
+
+testfrag_item = {
+	text : "测试片段",
+	children : [ {
+		text : "测试片段"
+	} ]
+}
+
+nottestfrag_item = {
+	text : "非测试元件",
+	children : [ {
+		text : "HTTP代理服务器"
+	}, {
+		text : "HTTP镜像服务器"
+	}, {
+		text : "属性显示"
+	} ]
+}
+
+sampler_item = {
+	text : "取样器",
+	children : [ {
+		text : "HTTP请求"
+	}, {
+		text : "测试活动"
+	}, {
+		text : "Debug Sampler"
+	}, {
+		text : "JSR223 Sampler"
+	}, {
+		line : true
+	}, {
+		text : "AJP/1.3取样器"
+	}, {
+		text : "Access Log Sampler"
+	}, {
+		text : "BeanShell取样器"
+	}, {
+		text : "FTP请求"
+	}, {
+		text : "JDBC request"
+	}, {
+		text : "JMS发布"
+	}, {
+		text : "JMS点到点"
+	}, {
+		text : "JMS订阅"
+	}, {
+		text : "JUnit请求"
+	}, {
+		text : "JAVA请求"
+	}, {
+		text : "LDAP扩展请求默认值"
+	}, {
+		text : "LDAP请求"
+	}, {
+		text : "OS进程取样器"
+	}, {
+		text : "SMTP取样器"
+	}, {
+		text : "TCP取样器"
+	}, {
+		text : "邮件阅读者取样器"
+	} ]
+}
+
+logic_item = {
+	text : "逻辑控制器",
+	children : [ {
+		text : "如果(if)控制器"
+	}, {
+		text : "事务控制器"
+	}, {
+		text : "循环控制器"
+	}, {
+		text : "while控制器"
+	}, {
+		line : true
+	}, {
+		text : "Foreach控制器"
+	}, {
+		text : "runtime控制器"
+	}, {
+		text : "include控制器"
+	}, {
+		text : "临界部分控制器"
+	}, {
+		text : "交替控制器"
+	}, {
+		text : "仅一次控制器"
+	}, {
+		text : "录制控制器"
+	}, {
+		text : "简单控制器"
+	}, {
+		text : "随机控制器"
+	}, {
+		text : "随机顺序控制器"
+	}, {
+		text : "吞吐量控制器"
+	}, {
+		text : "switch控制器"
+	}, {
+		text : "模块控制器"
+	} ]
+}
+
+insertitem = {
+	text : '插入上级',
+	click : click_Fake,
+	children : [ logic_item ]
 }

@@ -4,7 +4,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>jmeter测试用例执行</title>
-
 <meta name="description" content="启明泰和自动化测试系统" />
 <link rel="stylesheet" type="text/css" id="mylink" />
 <script src="../lib/jquery/jquery-1.9.0.min.js" type="text/javascript"></script>
@@ -24,8 +23,8 @@
 	type="text/javascript"></script>
 <script src="../lib/ligerUI/js/plugins/ligerDialog.js"
 	type="text/javascript"></script>
-<script src="../menu/menuitem.js"
-	type="text/javascript"></script>
+<script src="../menu/menuitem.js" type="text/javascript"></script>
+<script src="../menu/menudefinition.js" type="text/javascript"></script>
 <script type="text/javascript">
 	var tab = null;
 	var accordion = null;
@@ -33,12 +32,7 @@
 	var tabItems = [];
 
 	$(function() {
-		menu = $.ligerMenu({
-			top : 100,
-			left : 100,
-			width : 150,
-			items : [ config_item ]
-		});
+		firstmenu = getForthMenu();
 		//为func1和func添加点击事件
 		//布局
 		$("#layout1").ligerLayout({
