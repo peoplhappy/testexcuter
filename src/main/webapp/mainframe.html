@@ -33,6 +33,7 @@
 
 	$(function() {
 		firstmenu = getForthMenu();
+		var treedata=getTreeData().itemlist;
 		//为func1和func添加点击事件
 		//布局
 		$("#layout1").ligerLayout({
@@ -84,11 +85,10 @@
 
 		$("#tree1").ligerTree({
 			nodeWidth : 200,
-			data : [ {
-				text : "测试计划",
-				url : "/testplan/TestPlan.html",
-				itemType : "TESTPLAN"
-			} ],
+			data :treedata,
+			idFieldName :'id',
+            slide : false,
+            parentIDFieldName :'pid',
 			delay : true,
 			onExpand : function(node) {
 				var datas = getChildren(node.data)
@@ -112,7 +112,7 @@
 					//拼接url
 					url = "http://localhost:8080/" + node.data.url
 				}
-				f_addTab(tabid, node.data.text, url);
+				f_addTab(tabid, node.data.text, url,node.data.content);
 			},
 			onContextmenu : function(node, e) {
 				menu.show({
@@ -153,13 +153,15 @@
 		if (accordion && options.middleHeight - 24 > 0)
 			accordion.setHeight(options.middleHeight - 24);
 	}
-	function f_addTab(tabid, text, url) {
+	function f_addTab(tabid, text, url,nodedata) {
 		tab.addTabItem({
 			tabid : tabid,
 			text : text,
 			url : url,
 			callback : function() {
 				//addShowCodeBtn(tabid);
+				//页面传值
+				window.frames[tabid].inithtml(nodedata)
 				addFrameSkinLink(tabid);
 			}
 		});
@@ -264,6 +266,18 @@
 				return href.substring(0, href.toLowerCase().indexOf("lib"));
 			}
 		}
+	}
+	function getTreeData(path){
+		var url = "http://"+window.location.host+"/tree/getjmetertree?filepath="+"F:/code soft/测试工具/Response Assertion.jmx"
+		var data;
+		$.ajax({
+			url : url,
+			async : false,
+			success : function(result) {
+				data=result
+			}
+		});
+		return data
 	}
 </script>
 <style type="text/css">
