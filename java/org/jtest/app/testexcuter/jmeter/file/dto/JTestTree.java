@@ -5,7 +5,9 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.jmeter.save.SaveService;
 import org.apache.jmeter.util.JMeterUtils;
@@ -20,7 +22,7 @@ import com.google.gson.Gson;
  *
  */
 public class JTestTree {
-	private List<JTestTreeItem> itemlist = new ArrayList<>();
+	private List<JTestTreeItem<?>> itemlist = new ArrayList<>();
 	private Gson gson = new Gson();
 	private int startIndex = 1;// 初始id为0
 
@@ -64,8 +66,8 @@ public class JTestTree {
 		} else {
 			for (Object o : hashtree.list()) {
 				HashTree nexttree = hashtree.getTree(o);
-				JTestTreeItem item = new JTestTreeItem();
-				item.setContent(gson.toJson(o, o.getClass()));
+				JTestTreeItem<Object> item = new JTestTreeItem();
+				item.setContent(o);
 				item.setId(startIndex);
 				item.setPid(pid);
 				item.setUrl(UrlParam.getUrl(o.getClass().getName()));
@@ -82,11 +84,17 @@ public class JTestTree {
 		}
 	}
 
-	public List<JTestTreeItem> getItemlist() {
+	public List<JTestTreeItem<?>> getItemlist() {
 		return itemlist;
 	}
 
-	public void setItemlist(List<JTestTreeItem> itemlist) {
+	public void setItemlist(List<JTestTreeItem<?>> itemlist) {
 		this.itemlist = itemlist;
 	}
+	/**
+	 * 将tree重新存入文件
+	 * @param path
+	 */
+	
+	
 }

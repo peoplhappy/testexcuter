@@ -30,10 +30,11 @@
 	var accordion = null;
 	var tree = null;
 	var tabItems = [];
+	var treedata=null;
 
 	$(function() {
 		firstmenu = getForthMenu();
-		var treedata=getTreeData().itemlist;
+		treedata=getTreeData().itemlist;
 		//为func1和func添加点击事件
 		//布局
 		$("#layout1").ligerLayout({
@@ -274,10 +275,25 @@
 			url : url,
 			async : false,
 			success : function(result) {
-				data=result
+				data=JSON.parse(result)
 			}
 		});
 		return data
+	}
+	function saveTestPlan(){
+		for(var i=0;i<window.frames.length;i++){
+			
+		}
+	}
+	function runTestPlan(){
+		var url = "http://"+window.location.host+"/tree/runjmeter"+"?filepath="+"F:/code soft/测试工具/Response Assertion.jmx"
+		$.ajax({
+			url : url,
+			async : false,
+			success : function(result) {
+				data=JSON.parse(result)
+			}
+		});
 	}
 </script>
 <style type="text/css">
@@ -420,7 +436,7 @@ body {
 		<div id="menu" style="text-align: center">
 			<input type="image" src="../image/save.png" id="saveTestplan"
 				onclick="" /> <input type="image" src="../image/run.png"
-				id="runTestPlan" onclick="" /> <input type="image"
+				id="runTestPlan" onclick="runTestPlan()" /> <input type="image"
 				src="../image/run-notimer.png" id="runTestPlanNoTimer" onclick="" />
 			<input type="image" src="../image/road-sign-us-stop.png"
 				id="stopTestPlan" onclick="" /> <input type="image"

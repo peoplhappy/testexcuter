@@ -6,10 +6,10 @@ package org.jtest.app.testexcuter.jmeter.file.dto;
  * @author win10
  *
  */
-public class JTestTreeItem {
+public class JTestTreeItem<T> {
 
 	private int pid;// 父节点id，为0为根节点
-	private String content;// 内容
+	private T content;// 内容
 	private int id;// 自身节点id
 	private String text;// 前台的显示名称
 	private String url;// 跳转url
@@ -39,11 +39,11 @@ public class JTestTreeItem {
 		this.pid = pid;
 	}
 
-	public String getContent() {
+	public T getContent() {
 		return content;
 	}
 
-	public void setContent(String content) {
+	public void setContent(T content) {
 		this.content = content;
 	}
 

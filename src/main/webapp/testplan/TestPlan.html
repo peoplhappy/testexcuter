@@ -9,10 +9,10 @@
 <script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
 <script src="../common/stringutil.js"></script>
 <script type="text/javascript">
- 
+   var data=null
    
    function inithtml(content){
-	  var data=JSON.parse(content)
+	  data=content
 	  var elementname=data["propMap"]["TestElement.name"]["value"]
 	  var comments=data["propMap"]["TestPlan.comments"]["value"]
 	  $("#baseproperty .name").attr("value",elementname)

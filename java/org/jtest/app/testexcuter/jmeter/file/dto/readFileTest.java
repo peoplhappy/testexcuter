@@ -1,13 +1,16 @@
 package org.jtest.app.testexcuter.jmeter.file.dto;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.swing.JTree;
@@ -28,8 +31,10 @@ import org.apache.jmeter.testelement.property.JMeterProperty;
 import org.apache.jmeter.testelement.property.PropertyIterator;
 import org.apache.jmeter.util.JMeterUtils;
 import org.apache.jorphan.collections.HashTree;
+import org.apache.jorphan.collections.ListedHashTree;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 
 
 /**
@@ -39,49 +44,50 @@ import com.google.gson.Gson;
  *
  */
 public class readFileTest {
-
+    private static HashTree hashtree=new ListedHashTree();
 	public static void main(String[] args) {
 		JMeterUtils.loadJMeterProperties("jmeter.properties");
 		JMeterUtils.setJMeterHome(System.getProperty("user.dir"));
-		String path = "F:\\code soft\\测试工具\\Response Assertion.jmx";
+		String path = "F:\\code soft\\测试工具\\skynet.jmx";
 		File f = new File(path);
 		// FileServer.getFileServer().setBaseForScript(f);
         Gson gson=new Gson();
 		try {
 			HashTree tree = SaveService.loadTree(f);
-			List<TestPlanListener> testPlanListeners = Collections.synchronizedList(new ArrayList<>());
-			FileServer.getFileServer().setBasedir(path);
-			testPlanListeners.stream().forEach(TestPlanListener::testPlanLoaded);
-			JMeterTreeModel treeModel=new JMeterTreeModel();
-			JMeterTreeListener treeLis = new JMeterTreeListener(treeModel);
+			JTestTree testtree=new JTestTree(tree);
 			//HashTree hashTree = treeModel.addSubTree(tree, treeLis.getCurrentNode());
-            JTestTree testtree=new JTestTree(tree);
+//            JTestTree testtree=new JTestTree(tree);
+//            Object content=testtree.getItemlist().get(0).getContent();
+//            String className=testtree.getItemlist().get(0).getClassName();
+//            HashTree newtree=new HashTree(content);
+//            System.out.println(123);
+            //String content=testtree.getItemlist().get(0).getContent();
+            //String className=testtree.getItemlist().get(0).getClassName();
+//            HashTree newtree=new HashTree(gson.fromJson(content, Class.forName(className)));
 //			LinkedList<Object> copyList = new LinkedList<>(tree.list());
-	        for (Object o  : tree.list()) {
-	        	HashTree item=tree.getTree(o);
-	        	Class clz=o.getClass();
-	        	System.out.println(o.getClass().getName());
-	        	//System.out.println(gson.toJson(o,o.getClass()));
-	        	for(Object os:item.list()){
-	        		System.out.println(os.getClass().getName());
-	        		//System.out.println(gson.toJson(os,os.getClass()));
-		        	HashTree items=item.getTree(os);
-	        		for(Object oss:items.list()){
-	        			System.out.println(oss.getClass().getName());
-	        			//System.out.println(gson.toJson(oss,oss.getClass()));
-	        			HashTree itemss=items.getTree(oss);
-	        			for(Object osss:itemss.list()){
-	        				System.out.println(osss.getClass().getName());
-	        				//System.out.println(gson.toJson(osss,osss.getClass()));
-	        			}
-	        		}
-	        	}
-	        }
-			System.out.println(113);
+			getHashTreeFromJTestTree(hashtree,testtree,0);
+			
+			SaveService.saveTree(hashtree, new FileOutputStream(new File("D:\\1.jmx")));
+			System.out.println(123);
 			//JTestPlan testplan=treeModel.getTestPlan();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch (JsonSyntaxException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+	}
+	
+	
+
+	public static void getHashTreeFromJTestTree(HashTree subtree,JTestTree tree,int parentId){	
+		for(JTestTreeItem<?> item:tree.getItemlist()){
+			if(item.getPid()==parentId){
+				subtree.set(item.getContent(),new ListedHashTree());
+				getHashTreeFromJTestTree(subtree.getTree(item.getContent()),tree,item.getId());
+			}
+		}
+	
 	}
 }
