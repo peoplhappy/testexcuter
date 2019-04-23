@@ -12,15 +12,40 @@
    var data=null
    
    function inithtml(content){
-	  data=content
-	  var elementname=data["propMap"]["TestElement.name"]["value"]
-	  var comments=data["propMap"]["TestPlan.comments"]["value"]
+	  var elementname=data["propMap"]["TestElement.name"]["data"]["value"]
+	  var comments=data["propMap"]["TestPlan.comments"]["data"]["value"]
 	  $("#baseproperty .name").attr("value",elementname)
-	  $("#baseproperty .comments").attr("value",elementname)
+	  $("#baseproperty .comments").attr("value",comments)
 	  
 	  
    }
-
+   function setData(){
+	   
+   }
+   function getAllData(){
+	   //拿取所有值
+	   //取elementname
+	   var newValue=$("#baseproperty .name").val();
+	   if(data["propMap"]["TestElement.name"]["data"]["value"]!=newValue){
+		   data["propMap"]["TestElement.name"]["data"]["value"]=newValue;
+	   }
+	   //取comments
+	   newValue=$("#baseproperty .comments").val();
+	   if(data["propMap"]["TestPlan.comments"]["data"]["value"]!=newValue){
+		   data["propMap"]["TestPlan.comments"]["data"]["value"]=newValue;
+	   }
+   }
+   $(function() {
+	 var treedata=window.parent.treedata.itemlist;
+	 id=GetQueryString(window.location.search.substr(1),"id")
+	 for(var i=0;i<treedata.length;i++){
+		 if(treedata[i].id==id){
+			 data=treedata[i].content;
+			 break;
+		 }
+	 }
+	 inithtml(data)  
+   })
 
 </script>
 </head>

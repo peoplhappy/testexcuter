@@ -25,6 +25,10 @@ public class JTestTree {
 	private List<JTestTreeItem<?>> itemlist = new ArrayList<>();
 	private Gson gson = new Gson();
 	private int startIndex = 1;// 初始id为0
+	//原始构造函数
+	public JTestTree(){
+		
+	}
 
 	/**
 	 * 将hashtree转存为JTestTree
@@ -70,7 +74,9 @@ public class JTestTree {
 				item.setContent(o);
 				item.setId(startIndex);
 				item.setPid(pid);
-				item.setUrl(UrlParam.getUrl(o.getClass().getName()));
+				item.setUrl(CommonParam.getUrl(o.getClass().getName()));
+				item.setIcon(CommonParam.getImageUrl(o.getClass().getName()));
+				item.setMenuName(CommonParam.getMenuName(o.getClass().getName()));
 				item.setClassName(o.getClass().getName());
 				Class clz = o.getClass();
 				Method method = clz.getMethod("getName", null);

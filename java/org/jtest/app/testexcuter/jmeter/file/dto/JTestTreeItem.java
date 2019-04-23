@@ -14,10 +14,31 @@ public class JTestTreeItem<T> {
 	private String text;// 前台的显示名称
 	private String url;// 跳转url
 	private String className;// element的类
+	private String menuName;
+	private String icon;
+	public String getIcon() {
+		return icon;
+	}
+
+	public void setIcon(String icon) {
+		this.icon = icon;
+	}
+
+	public String getMenuName() {
+		return menuName;
+	}
+
+	public void setMenuName(String menuName) {
+		this.menuName = menuName;
+	}
+
+	
 
 	public String getUrl() {
 		return url;
 	}
+
+
 
 	public void setUrl(String url) {
 		this.url = url;

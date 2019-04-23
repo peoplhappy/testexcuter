@@ -33,8 +33,12 @@
 	var treedata=null;
 
 	$(function() {
-		firstmenu = getForthMenu();
-		treedata=getTreeData().itemlist;
+		firstmenu = getTopmenu();
+		secondmenu = getSecondMenu();
+		thirdmenu = getThirdMenu();
+		thirdmenu1 = getThird1Menu();
+		fourthmenu = getForthMenu();
+		treedata=getTreeData();
 		//为func1和func添加点击事件
 		//布局
 		$("#layout1").ligerLayout({
@@ -86,19 +90,11 @@
 
 		$("#tree1").ligerTree({
 			nodeWidth : 200,
-			data :treedata,
+			data :getTreeData().itemlist,
 			idFieldName :'id',
             slide : false,
             parentIDFieldName :'pid',
 			delay : true,
-			onExpand : function(node) {
-				var datas = getChildren(node.data)
-				var manager = $("#tree1").ligerGetTreeManager();
-				if (datas != undefined) {
-					manager.reloadNode(node.target, datas)
-				}
-
-			},
 			onClick : function(node) {
 				var data = node.data
 				//var manager = $("#tree1").ligerGetTreeManager();
@@ -106,16 +102,30 @@
 
 			},
 			onSelect : function(node) {
+				//使用itemid来当做tabid
 				var tabid = $(node.target).attr("tabid");
 				if (!tabid) {
 					tabid = new Date().getTime();
 					$(node.target).attr("tabid", tabid)
 					//拼接url
-					url = "http://localhost:8080/" + node.data.url
+					url = "http://localhost:8080/" + node.data.url+"?id="+node.data.id
 				}
 				f_addTab(tabid, node.data.text, url,node.data.content);
 			},
 			onContextmenu : function(node, e) {
+				var menu=null;
+				if(node.data.menuName=="firstmenu"){
+					menu=firstmenu
+				}else if(node.data.menuName=="secondmenu"){
+					menu=secondmenu
+				}else if(node.data.menuName=="thirdmenu"){
+					menu=thirdmenu
+				}else if(node.data.menuName=="thirdmenu1"){
+					menu=thirdmenu1
+				}else if(node.data.menuName=="fourthmenu"){
+					menu=fourthmenu
+				}
+				
 				menu.show({
 					top : e.pageY,
 					left : e.pageX
@@ -161,9 +171,7 @@
 			url : url,
 			callback : function() {
 				//addShowCodeBtn(tabid);
-				//页面传值
-				window.frames[tabid].inithtml(nodedata)
-				addFrameSkinLink(tabid);
+				
 			}
 		});
 	}
@@ -269,7 +277,7 @@
 		}
 	}
 	function getTreeData(path){
-		var url = "http://"+window.location.host+"/tree/getjmetertree?filepath="+"F:/code soft/测试工具/Response Assertion.jmx"
+		var url = "http://"+window.location.host+"/tree/getjmetertree?filepath="+"F:/code soft/测试工具/responeassertion.jmx"
 		var data;
 		$.ajax({
 			url : url,
@@ -282,11 +290,29 @@
 	}
 	function saveTestPlan(){
 		for(var i=0;i<window.frames.length;i++){
-			
+			var childid=window.frames[i].id
+			for(var j=0;j<treedata.itemlist.length;j++){
+				if(childid==treedata.itemlist[j].id){
+					window.frames[i].getAllData();
+					treedata.itemlist[j].content=window.frames[i].data;
+				}
+			}
 		}
+		var url="http://"+window.location.host+"/tree/savejmetertree"+"?filepath="+"F:/code soft/测试工具/responeassertion.jmx"
+		$.ajax({
+			type:"post",
+			url : url,
+			dataType:"json",
+			contentType:"application/json;charset=utf-8",
+			data:JSON.stringify(treedata),
+			async : false,
+			success : function(result) {
+				console.log(result)
+			}
+		});
 	}
 	function runTestPlan(){
-		var url = "http://"+window.location.host+"/tree/runjmeter"+"?filepath="+"F:/code soft/测试工具/Response Assertion.jmx"
+		var url = "http://"+window.location.host+"/tree/runjmeter"+"?filepath="+"F:/code soft/测试工具/responeassertion.jmx"
 		$.ajax({
 			url : url,
 			async : false,
@@ -435,7 +461,7 @@ body {
 	<div id="topmenu" class="l-topmenu">
 		<div id="menu" style="text-align: center">
 			<input type="image" src="../image/save.png" id="saveTestplan"
-				onclick="" /> <input type="image" src="../image/run.png"
+				onclick="saveTestPlan()" /> <input type="image" src="../image/run.png"
 				id="runTestPlan" onclick="runTestPlan()" /> <input type="image"
 				src="../image/run-notimer.png" id="runTestPlanNoTimer" onclick="" />
 			<input type="image" src="../image/road-sign-us-stop.png"

@@ -90,6 +90,37 @@ function getThirdMenu() {
 		}, help_item ]
 	});
 }
+
+function getThird1Menu() {
+	sampler_AddItem = add_item
+	sampler_AddItem["children"] = [ sampler_item, {
+		line : true
+	}, logic_item,{
+		line : true
+	}, pre_item, post_item, assertion_item, {
+		line : true
+	}, timer_item,{
+		line : true
+	}, config_item,listen_item]
+	return $.ligerMenu({
+		top : 100,
+		left : 100,
+		width : 200,
+		items : [ sampler_AddItem,insertitem, {
+			line : true
+		},addresponsetime_item,start_item,nowaitstart_item,validate_item, {
+			line : true
+		},cut_item,copy_item,paste_item,duplicate_item,delete_item,{
+			line : true
+		}, open_item, combine_item, selectassave_item, {
+			line : true
+		}, savenodeasimage_item, savescreenasimage_item, {
+			line : true
+		}, enable_item, disable_item, switch_item, {
+			line : true
+		}, help_item ]
+	});
+}
 function getForthMenu() {
 	return $.ligerMenu({
 		top : 100,

@@ -7,6 +7,47 @@
 	href="//apps.bdimg.com/libs/jqueryui/1.10.4/css/jquery-ui.min.css">
 <script src="//apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+<script src="../common/stringutil.js"></script>
+<script type="text/javascript">
+   var data=null
+   
+   function inithtml(content){
+	  var elementname=data["propMap"]["TestElement.name"]["value"]
+	  var comments=data["propMap"]["TestPlan.comments"]["value"]
+	  $("#baseproperty .name").attr("value",elementname)
+	  $("#baseproperty .comments").attr("value",elementname)
+	  
+	  
+   }
+   function setData(){
+	   
+   }
+   function getAllData(){
+	   //拿取所有值
+	   //取elementname
+	   var newValue=$("#baseproperty .name").attr("value");
+	   if(data["propMap"]["TestElement.name"]["value"]!=newValue){
+		   data["propMap"]["TestElement.name"]["value"]=newValue;
+	   }
+	   //取comments
+	   newValue=$("#baseproperty .comments").attr("value");
+	   if(data["propMap"]["TestPlan.comments"]["value"]!=newValue){
+		   data["propMap"]["TestPlan.comments"]["value"]=newValue;
+	   }
+   }
+   $(function() {
+	 var treedata=window.parent.treedata;
+	 id=GetQueryString(window.location.search.substr(1),"id")
+	 for(var i=0;i<treedata.length;i++){
+		 if(treedata[i].id==id){
+			 data=treedata[i].content;
+			 break;
+		 }
+	 }
+	 inithtml(data)  
+   })
+
+</script>
 <style type="text/css">
 body {
 	padding: 5px;

@@ -32,23 +32,59 @@ body {
 h4 {
 	margin: 20px;
 }
-#bodydata-textarea{
-    width: 100%; 
-    min-height:400px;
-    max-height:700px;
-    outline: 0;
-    border: 1px solid #000;
-    font-size: 13px;
-    overflow-x: hidden;
-    overflow-y: auto;
-    -webkit-user-modify: read-write-plaintext-only;
+
+#bodydata-textarea {
+	width: 100%;
+	min-height: 400px;
+	max-height: 700px;
+	outline: 0;
+	border: 1px solid #000;
+	font-size: 13px;
+	overflow-x: hidden;
+	overflow-y: auto;
+	-webkit-user-modify: read-write-plaintext-only;
 }
 </style>
 <script type="text/javascript">
+	var data = null
+
+	function inithtml(content) {
+		var elementname = data["propMap"]["TestElement.name"]["value"]
+		var comments = data["propMap"]["TestPlan.comments"]["value"]
+		$("#baseproperty .name").attr("value", elementname)
+		$("#baseproperty .comments").attr("value", elementname)
+
+	}
+	function setData() {
+
+	}
+	function getAllData() {
+		//拿取所有值
+		//取elementname
+		var newValue = $("#baseproperty .name").attr("value");
+		if (data["propMap"]["TestElement.name"]["value"] != newValue) {
+			data["propMap"]["TestElement.name"]["value"] = newValue;
+		}
+		//取comments
+		newValue = $("#baseproperty .comments").attr("value");
+		if (data["propMap"]["TestPlan.comments"]["value"] != newValue) {
+			data["propMap"]["TestPlan.comments"]["value"] = newValue;
+		}
+	}
 	$(function() {
 		$("#tabs").tabs()
 		$("#parmstype").tabs()
+		var treedata = window.parent.treedata;
+		id = GetQueryString(window.location.search.substr(1), "id")
+		for (var i = 0; i < treedata.length; i++) {
+			if (treedata[i].id == id) {
+				data = treedata[i].content;
+				break;
+			}
+		}
+		inithtml(data)
 	})
+
 </script>
 </head>
 <body>
@@ -109,126 +145,134 @@ h4 {
 							<li><a href="#tabsfiledata">Files Upload</a></li>
 						</ul>
 						<div id="tabsparamters">
-							<p style="text-align:center">Send Paramters With the Request</p></br>
-							<div id="paramtable" style="width:100%;height:400px;border: 1px solid #000" >
-							<table border="1" cellpadding="0" cellspacing="0" width="100%">
-							  <tr>
-							     <td>Name:</td>
-							     <td>value</td>
-							     <td>URLENCODE?</td>
-							     <td>ContentType</td>
-							     <td>Include Equals?</td>
-							  </tr>
-							</table>							
-							</div></br>
-							<div style="text-align:center">
-							    <input type="button" value="Detail">
-							    <input type="button" value="Add">
-							    <input type="button" value="Add From Clipboard">
-							    <input type="button" value="Delete">
-							    <input type="button" value="Up">
-							    <input type="button" value="Down">
+							<p style="text-align: center">Send Paramters With the Request</p>
+							</br>
+							<div id="paramtable"
+								style="width: 100%; height: 400px; border: 1px solid #000">
+								<table border="1" cellpadding="0" cellspacing="0" width="100%">
+									<tr>
+										<td>Name:</td>
+										<td>value</td>
+										<td>URLENCODE?</td>
+										<td>ContentType</td>
+										<td>Include Equals?</td>
+									</tr>
+								</table>
+							</div>
+							</br>
+							<div style="text-align: center">
+								<input type="button" value="Detail"> <input
+									type="button" value="Add"> <input type="button"
+									value="Add From Clipboard"> <input type="button"
+									value="Delete"> <input type="button" value="Up">
+								<input type="button" value="Down">
 							</div>
 						</div>
 						<div id="tabsbodydata">
-						    <div id="bodydatatable" style="width:100%;height:400px;border: 1px solid #000" >
-							<table border="1" cellpadding="0" cellspacing="0" width="100%">
-							  <tr>
-							     <td style="width:10%;height:400px">1</td>
-							     <td><div id="bodydata-textarea" contenteditable="true" data-text=""></div></td>
-							  </tr>
-							</table>		
-						</div>
+							<div id="bodydatatable"
+								style="width: 100%; height: 400px; border: 1px solid #000">
+								<table border="1" cellpadding="0" cellspacing="0" width="100%">
+									<tr>
+										<td style="width: 10%; height: 400px">1</td>
+										<td><div id="bodydata-textarea" contenteditable="true"
+												data-text=""></div></td>
+									</tr>
+								</table>
+							</div>
 						</div>
 						<div id="tabsfiledata">
-							<div id="filetable" style="width:100%;height:400px;border: 1px solid #000" >
-							<table border="1" cellpadding="0" cellspacing="0" width="100%">
-							  <tr>
-							     <td>File Path</td>
-							     <td>Parameter Name</td>
-							     <td>Mime Type</td>
-							  </tr>
-							</table>		
-						</div></br>
-						<div style="text-align:center">
-							   <input type="button" value="Add">
-							   <input type="button" value="Browse...">
-							   <input type="button" value="Delete">
+							<div id="filetable"
+								style="width: 100%; height: 400px; border: 1px solid #000">
+								<table border="1" cellpadding="0" cellspacing="0" width="100%">
+									<tr>
+										<td>File Path</td>
+										<td>Parameter Name</td>
+										<td>Mime Type</td>
+									</tr>
+								</table>
+							</div>
+							</br>
+							<div style="text-align: center">
+								<input type="button" value="Add"> <input type="button"
+									value="Browse..."> <input type="button" value="Delete">
+							</div>
+
 						</div>
-
-					</div>
-
 				</fieldset>
 			</div>
 			<div id="tabs-2">
-			   <div style="width:100%;height:400px">
-			   <div style="width:100%;height:50px">
-			     <div style="float:left">
-			    <fieldset id="client implemention" >
-					<legend>Client implemention</legend>
-					Implemention:<select>
-						<option value="HttpClient4">HttpClient4</option>
-						<option value="Java">Java</option>
-						<option value=""></option>
-					</select>
-				</fieldset>
-				</div>
-				<div style="float:left">
-				<fieldset id="TimeOuts" >
-					<legend>TimeOuts(milliseconds)</legend>
-					Connect:<input type="text" value=""> Response:<input type="text" value="">
-				</fieldset>
-			   </div>   
-			     
-				</div></br>
-				 <div style="width:70%">
-			        <fieldset id="Embedded Resources from Html Files" >
-					<legend>Embedded Resources from Html Files</legend>
-					<label><input type="checkbox" value="">Retrieve All Embedded Resources</label> 
-					<label><input type="checkbox" value="">Parallel downloads.Number:<input type="text" id="downloadnumber" value=""> </label> 
-					URLs must Match: <input type="text" id="urlmustmatch" value="">
-				   </fieldset>
-			     
-			   </div>
-				  <div style="width:70%">
-			        <fieldset >
-					<legend>Source Address</legend>
-					<select>
-						<option value="IP/HostName">IP/HostName</option>
-						<option value="Device">Device</option>
-						<option value="Device IPV4">Device IPV4</option>
-						<option value="Device IPV6">Device IPV6</option>
-					</select>
-						<input type="text" value="">
-				   </fieldset>
-			     
-			   </div>
-			   
-			     <div style="width:70%">
-			        <fieldset >
-					<legend>Proxy Server</legend>
-					Server Name or IP:<input type="text" value="">
-				    Port Number:<input type="text" value="">
-				    Username:<input type="text" value="">
-					Password:<input type="text" value="">
-				   </fieldset>
-			     
-			   </div>
-			    <div style="width:70%">
-			        <fieldset >
-					<legend>Option Tasks</legend>
-					<label><input type="checkbox">Save response as MD5 hash?</label>
-				   </fieldset>
-			     
-			   </div>
-			   </div>
-			   
-			   
+				<div style="width: 100%; height: 400px">
+					<div style="width: 100%; height: 50px">
+						<div style="float: left">
+							<fieldset id="client implemention">
+								<legend>Client implemention</legend>
+								Implemention:<select>
+									<option value="HttpClient4">HttpClient4</option>
+									<option value="Java">Java</option>
+									<option value=""></option>
+								</select>
+							</fieldset>
+						</div>
+						<div style="float: left">
+							<fieldset id="TimeOuts">
+								<legend>TimeOuts(milliseconds)</legend>
+								Connect:<input type="text" value=""> Response:<input
+									type="text" value="">
+							</fieldset>
+						</div>
 
-			  </div> 
-				
+					</div>
+					</br>
+					<div style="width: 70%">
+						<fieldset id="Embedded Resources from Html Files">
+							<legend>Embedded Resources from Html Files</legend>
+							<label><input type="checkbox" value="">Retrieve
+								All Embedded Resources</label> <label><input type="checkbox"
+								value="">Parallel downloads.Number:<input type="text"
+								id="downloadnumber" value=""> </label> URLs must Match: <input
+								type="text" id="urlmustmatch" value="">
+						</fieldset>
+
+					</div>
+					<div style="width: 70%">
+						<fieldset>
+							<legend>Source Address</legend>
+							<select>
+								<option value="IP/HostName">IP/HostName</option>
+								<option value="Device">Device</option>
+								<option value="Device IPV4">Device IPV4</option>
+								<option value="Device IPV6">Device IPV6</option>
+							</select> <input type="text" value="">
+						</fieldset>
+
+					</div>
+
+					<div style="width: 70%">
+						<fieldset>
+							<legend>Proxy Server</legend>
+							Server Name or IP:<input type="text" value=""> Port
+							Number:<input type="text" value=""> Username:<input
+								type="text" value=""> Password:<input type="text"
+								value="">
+						</fieldset>
+
+					</div>
+					<div style="width: 70%">
+						<fieldset>
+							<legend>Option Tasks</legend>
+							<label><input type="checkbox">Save response as
+								MD5 hash?</label>
+						</fieldset>
+
+					</div>
+				</div>
+
+
+
 			</div>
+
 		</div>
+	</div>
 
 
 

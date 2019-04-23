@@ -13,6 +13,7 @@
 <script src="../../lib/jquery/jquery-1.9.0.min.js"
 	type="text/javascript"></script>
 <script src="../../lib/ligerUI/js/ligerui.all.js"></script>
+<script src="../common/stringutil.js"></script>
 <style type="text/css">
 body {
 	padding: 5px;
@@ -37,32 +38,54 @@ h4 {
 }
 </style>
 <script type="text/javascript">
-	basecontent = 'name:<input type="text" style="width:90%" class="name" value="Response Assertion"></br>comments:<input type="text" style="width:87.8%" class="comments" value="">'	
-    applytypecontent='<label><input name="applytype" type="radio" value="MainSampleandSubSample" />Main Sample and sub-samples</label><label><input name="applytype" type="radio" value="MainSampleonly" />Main Sample only </label> <label><input name="applytype" type="radio" value="SubSampleonly" />sub-sample only </label> <label><input name="applytype" type="radio" value="JmeterVarible"/>JmeterVarible name to use:<input type="text" name="variblename"> </label>'
-	fieldtypecontent='<label style="float:left;width:25%"><input name="fieldtype" type="radio" value="TextResponse"/>Text Response</label>'
-	+'<label style="float:left;width:25%"><input name="fieldtype" type="radio" value="ResponseCode" />Response Code</label>'
-	+'<label style="float:left;width:25%" ><input name="fieldtype" type="radio" value="ResponseMsg" />Response Message</label>'
-	+'<label style="float:left;width:25%"><input name="fieldtype" type="radio" value="ResponseHeaders" />Response Headers</label></br>'
-	+'<label style="float:left;width:25%"><input name="fieldtype" type="radio" value="RequestHeaders"/>Request Headers</label>'
-	+'<label style="float:left;width:25%"><input name="fieldtype" type="radio" value="UrlSampled"  />Url Sampled</label>'
-	+'<label style="float:left;width:25%"><input name="fieldtype" type="radio" value="Document" />Document(text)</label>'
-	+'<label style="float:left;width:25%"><input name="fieldtype" type="radio" value="RequestData"/>Request Data</label></br>'
-	+'<label style="float:left;width:25%"><input name="ignorestatus" type="checkbox"/>Ignore Status</label>'
-	patterntypecontent='<label style="float:left;width:15%" ><input name="patterntype" type="radio" value="Contains"/>Contains</label>'
-	+'<label style="float:left;width:15%"  ><input name="patterntype" type="radio" value="Matches"/>Matches</label>'
-	+'<label  style="float:left;width:15%" ><input name="patterntype" type="radio" value="Equals"/>Equals</label>'
-	+'<label style="float:left;width:15%"  ><input name="patterntype" type="radio" value="Substring"/>Substring</label>'
-	+'<label style="float:left;width:15%" ><input name="patterns" type="checkbox" value="Not"/>Not</label>'
-	+'<label style="float:left;width:15%" ><input name="patterns" type="checkbox" value="Or"/>Or</label>'
-	patternstablecontent='<div style="width:99%;height:94%;border:1px solid #000">'
-	+'<table height="100%" border="1"></table></div>'
-	+'<div style="text-align:center">'
-	+'<input type="button" onclick=""  value="Add" >   '
-	+'   <input type="button" onclick=""  value="Add from clipboard">  '
-	+'   <input type="button" onclick=""  value="Delete">'
-	+'</div>'
-	failuremessagecontent='<div style="text-align:center"><input type="text" width="100%" name="failuremessage" value=""></div>'
-	$(function(){
+	basecontent = 'name:<input type="text" style="width:90%" class="name" value="Response Assertion"></br>comments:<input type="text" style="width:87.8%" class="comments" value="">'
+	applytypecontent = '<label><input name="applytype" type="radio" value="MainSampleandSubSample" />Main Sample and sub-samples</label><label><input name="applytype" type="radio" value="MainSampleonly" />Main Sample only </label> <label><input name="applytype" type="radio" value="SubSampleonly" />sub-sample only </label> <label><input name="applytype" type="radio" value="JmeterVarible"/>JmeterVarible name to use:<input type="text" name="variblename"> </label>'
+	fieldtypecontent = '<label style="float:left;width:25%"><input name="fieldtype" type="radio" value="TextResponse"/>Text Response</label>'
+			+ '<label style="float:left;width:25%"><input name="fieldtype" type="radio" value="ResponseCode" />Response Code</label>'
+			+ '<label style="float:left;width:25%" ><input name="fieldtype" type="radio" value="ResponseMsg" />Response Message</label>'
+			+ '<label style="float:left;width:25%"><input name="fieldtype" type="radio" value="ResponseHeaders" />Response Headers</label></br>'
+			+ '<label style="float:left;width:25%"><input name="fieldtype" type="radio" value="RequestHeaders"/>Request Headers</label>'
+			+ '<label style="float:left;width:25%"><input name="fieldtype" type="radio" value="UrlSampled"  />Url Sampled</label>'
+			+ '<label style="float:left;width:25%"><input name="fieldtype" type="radio" value="Document" />Document(text)</label>'
+			+ '<label style="float:left;width:25%"><input name="fieldtype" type="radio" value="RequestData"/>Request Data</label></br>'
+			+ '<label style="float:left;width:25%"><input name="ignorestatus" type="checkbox"/>Ignore Status</label>'
+	patterntypecontent = '<label style="float:left;width:15%" ><input name="patterntype" type="radio" value="Contains"/>Contains</label>'
+			+ '<label style="float:left;width:15%"  ><input name="patterntype" type="radio" value="Matches"/>Matches</label>'
+			+ '<label  style="float:left;width:15%" ><input name="patterntype" type="radio" value="Equals"/>Equals</label>'
+			+ '<label style="float:left;width:15%"  ><input name="patterntype" type="radio" value="Substring"/>Substring</label>'
+			+ '<label style="float:left;width:15%" ><input name="patterns" type="checkbox" value="Not"/>Not</label>'
+			+ '<label style="float:left;width:15%" ><input name="patterns" type="checkbox" value="Or"/>Or</label>'
+	patternstablecontent = '<div style="width:99%;height:94%;border:1px solid #000">'
+			+ '<table height="100%" border="1"></table></div>'
+			+ '<div style="text-align:center">'
+			+ '<input type="button" onclick=""  value="Add" >   '
+			+ '   <input type="button" onclick=""  value="Add from clipboard">  '
+			+ '   <input type="button" onclick=""  value="Delete">' + '</div>'
+	failuremessagecontent = '<div style="text-align:center"><input type="text" width="100%" name="failuremessage" value=""></div>'
+	var data = null
+
+	function inithtml(content) {
+		var elementname = data["propMap"]["TestElement.name"]["value"]
+		var comments = data["propMap"]["TestPlan.comments"]["value"]
+		$("#baseproperty .name").attr("value", elementname)
+		$("#baseproperty .comments").attr("value", elementname)
+
+	}
+	function getAllData() {
+		//拿取所有值
+		//取elementname
+		var newValue = $(".name").attr("value");
+		if (data["propMap"]["TestElement.name"]["value"] != newValue) {
+			data["propMap"]["TestElement.name"]["value"] = newValue;
+		}
+		//取comments
+		newValue = $(".comments").attr("value");
+		if (data["propMap"]["TestPlan.comments"]["value"] != newValue) {
+			data["propMap"]["TestPlan.comments"]["value"] = newValue;
+		}
+	}
+
+	$(function() {
 		$("#portalMain").ligerPortal({
 			columns : [ {
 				width : '100%',
@@ -72,8 +95,7 @@ h4 {
 					height : 70,
 					content : basecontent
 				} ]
-			},
-			{
+			}, {
 				width : '100%',
 				panels : [ {
 					title : 'Apply to',
@@ -81,7 +103,7 @@ h4 {
 					height : 50,
 					content : applytypecontent
 				} ]
-			},{
+			}, {
 				width : '100%',
 				panels : [ {
 					title : 'Field to Test',
@@ -89,7 +111,7 @@ h4 {
 					height : 80,
 					content : fieldtypecontent
 				} ]
-			},{
+			}, {
 				width : '100%',
 				panels : [ {
 					title : 'Pattern Match Rules',
@@ -97,7 +119,7 @@ h4 {
 					height : 50,
 					content : patterntypecontent
 				} ]
-			},{
+			}, {
 				width : '100%',
 				panels : [ {
 					title : 'Patterns to test',
@@ -105,7 +127,7 @@ h4 {
 					height : 400,
 					content : patternstablecontent
 				} ]
-			},{
+			}, {
 				width : '100%',
 				panels : [ {
 					title : 'Custom failure Message',
@@ -113,15 +135,22 @@ h4 {
 					height : 50,
 					content : failuremessagecontent
 				} ]
-			}]
-		    
+			} ]
+
 		});
+		var treedata = window.parent.treedata;
+		id = GetQueryString(window.location.search.substr(1), "id")
+		for (var i = 0; i < treedata.length; i++) {
+			if (treedata[i].id == id) {
+				data = treedata[i].content;
+				break;
+			}
+		}
+		inithtml(data)
 	})
-	
-	
 </script>
 </head>
-<body >
+<body>
 	<div class="l-page-top">Response Assertion</div>
 
 	<div style="width: 100%;" id="portalMain"></div>
